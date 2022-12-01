@@ -5,10 +5,14 @@
   "license": "MIT",
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/cookie-parser": "^1.4.3",
+    "@types/cors": "^2.8.12",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/uuid": "^8.3.4",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -36,6 +40,8 @@
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "test": "cross-env NODE_ENV=test jest",
-    "migrate": "typeorm-ts-node-commonjs migration:run -d src/data-source.ts"
+    "migrate": "typeorm-ts-node-commonjs migration:run -d src/data-source.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
   }
 }

@@ -26,6 +26,13 @@ const loginUserController = async (req: Request, res: Response) => {
 
   const token: string = await loginUserService({ email, password });
 
+  res.cookie('token', token, {
+    httpOnly: true,
+    sameSite: 'none',
+    secure: true,
+    domain: '.local',
+  });
+
   return res.status(200).json({ token: token });
 };
 

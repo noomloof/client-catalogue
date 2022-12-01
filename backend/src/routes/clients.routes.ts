@@ -5,7 +5,6 @@ import {
   listUserClientsController,
   updateClientController,
 } from '../controllers/clients';
-import { loginUserController } from '../controllers/users';
 import clientCreationDataEnforcementMiddleware from '../middlewares/clientCreationDataEnforcement.middleware';
 import clientUpdateDataEnforcementMiddleware from '../middlewares/clientUpdateDataEnforcement.middleware';
 import tokenVerifierMiddleware from '../middlewares/tokenVerifier.middleware';
