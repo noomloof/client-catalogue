@@ -30,7 +30,7 @@ const loginUserController = async (req: Request, res: Response) => {
     httpOnly: true,
     sameSite: 'none',
     secure: true,
-    domain: '.local',
+    maxAge: 3600000,
   });
 
   return res.status(200).json({ token: token });
@@ -61,10 +61,17 @@ const deleteUserController = async (req: Request, res: Response) => {
   return res.status(204).json({ message: 'User deleted successfully' });
 };
 
+const deleteUserCookieController = async (req: Request, res: Response) => {
+  res.clearCookie('token');
+
+  return res.status(200).json({ message: 'Cookie deleted' });
+};
+
 export {
   createUserController,
   loginUserController,
   listUserController,
   updateUserController,
   deleteUserController,
+  deleteUserCookieController,
 };

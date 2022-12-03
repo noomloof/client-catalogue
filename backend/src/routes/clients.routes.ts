@@ -25,7 +25,11 @@ export const clientRoutes = () => {
     updateClientController
   );
   routes.get('/list', tokenVerifierMiddleware, listUserClientsController);
-  routes.delete('/delete', tokenVerifierMiddleware, deleteClientController);
+  routes.delete(
+    '/delete/:clientId',
+    tokenVerifierMiddleware,
+    deleteClientController
+  );
 
   return routes;
 };

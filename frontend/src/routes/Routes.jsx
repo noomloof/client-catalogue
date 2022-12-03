@@ -15,7 +15,7 @@ const Routes = () => {
       <Route path='/register'>
         <Register />
       </Route>
-      <Route path='/catalogue'>
+      <Route path='/catalog'>
         <Main />
       </Route>
     </Switch>

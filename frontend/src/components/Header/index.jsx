@@ -6,12 +6,13 @@ import {
   MenuContainer,
 } from './styles';
 import logo from '../../assets/transparentlogo.svg';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { ShowLoginContext } from '../../providers/showLogin';
 import { ShowLoginAnimationContext } from '../../providers/showLoginAnimation';
+import api from '../../services/api';
 
-const Header = () => {
+const Header = (props) => {
   const { setShowLogin } = useContext(ShowLoginContext);
   const { setShowLoginAnimation } = useContext(ShowLoginAnimationContext);
 
@@ -21,29 +22,66 @@ const Header = () => {
     history.push('/register');
   };
 
+  const handleLogout = () => {
+    api
+      .get('/login')
+      .then((response) => {
+        console.log(response);
+        history.push('/');
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <Container>
-      <LogoContainer>
-        {' '}
-        <img
-          src={logo}
-          alt='logo'
-        />
-      </LogoContainer>
-      <MenuContainer>
-        <List>
-          <ListItem>About</ListItem>
-          <ListItem onClick={() => pushRegister()}>Register</ListItem>
-          <ListItem
-            onClick={() => {
-              setShowLoginAnimation(true);
-              setShowLogin(true);
-            }}
-          >
-            Login
-          </ListItem>
-        </List>
-      </MenuContainer>
+      {props.isMain ? (
+        <>
+          {' '}
+          <LogoContainer>
+            {' '}
+            <img
+              src={logo}
+              alt='logo'
+            />
+          </LogoContainer>
+          <MenuContainer>
+            <List>
+              <ListItem>About</ListItem>
+              <ListItem
+                className='logout'
+                onClick={() => handleLogout()}
+              >
+                Logout
+              </ListItem>
+            </List>
+          </MenuContainer>{' '}
+        </>
+      ) : (
+        <>
+          {' '}
+          <LogoContainer>
+            {' '}
+            <img
+              src={logo}
+              alt='logo'
+            />
+          </LogoContainer>
+          <MenuContainer>
+            <List>
+              <ListItem>About</ListItem>
+              <ListItem onClick={() => pushRegister()}>Register</ListItem>
+              <ListItem
+                onClick={() => {
+                  setShowLoginAnimation(true);
+                  setShowLogin(true);
+                }}
+              >
+                Login
+              </ListItem>
+            </List>
+          </MenuContainer>{' '}
+        </>
+      )}
     </Container>
   );
 };

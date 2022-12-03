@@ -7,8 +7,11 @@ import {
   Content,
   FirstImage,
   FirstSection,
+  InputContainer,
   Modal,
   ModalBox,
+  ModalButton,
+  ModalForm,
   Punchline,
   SecondSection,
   TextArea,
@@ -18,20 +21,58 @@ import secure_server from '../../assets/secure_server.svg';
 import { useContext, useState } from 'react';
 import { ShowLoginContext } from '../../providers/showLogin';
 import { ShowLoginAnimationContext } from '../../providers/showLoginAnimation';
+import { IoCloseSharp } from 'react-icons/io5';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import api from '../../services/api';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Landing = () => {
+  const [emailsInput, setEmailsInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+
   const { showLogin, setShowLogin } = useContext(ShowLoginContext);
   const { showLoginAnimation, setShowLoginAnimation } = useContext(
     ShowLoginAnimationContext
   );
 
+  const schema = yup.object().shape({
+    email: yup.string().email().required('Required field'),
+    password: yup.string().required('Required field'),
+  });
+
+  const history = useHistory();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const onSubmitHandler = ({ email, password }) => {
+    const loginInfo = { email, password };
+
+    api
+      .post('/login', loginInfo)
+      .then((response) => {
+        console.log(response);
+        setShowLoginAnimation(false);
+        setShowLogin(false);
+        history.push('/catalog');
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message, { autoClose: 1000 });
+      });
+  };
+
   function bodyClickHandler(e) {
-    console.log(e.target.classList);
     if (e.target.classList.contains('dark-bg')) {
       setShowLoginAnimation(false);
       setTimeout(() => {
         setShowLogin(false);
-      }, 399);
+      }, 499);
     }
   }
 
@@ -39,7 +80,7 @@ const Landing = () => {
     setShowLoginAnimation(false);
     setTimeout(() => {
       setShowLogin(false);
-    }, 399);
+    }, 499);
   }
 
   return (
@@ -53,14 +94,43 @@ const Landing = () => {
             {' '}
             <header>
               {' '}
-              <div>Cadastrar tecnologia</div>{' '}
+              <div> &nbsp; </div>{' '}
               <div
                 onClick={closeModalHandler}
                 className='close'
               >
-                &times;
+                <IoCloseSharp />
               </div>{' '}
             </header>
+            <ModalForm>
+              <form onSubmit={handleSubmit(onSubmitHandler)}>
+                <InputContainer>
+                  <input
+                    {...register('email')}
+                    type='text'
+                    value={emailsInput}
+                    name='email'
+                    onChange={(e) => setEmailsInput(e.target.value)}
+                  />
+                  <label htmlFor='email'> Your email </label>
+                  <section> {errors.email?.message} </section>
+                </InputContainer>
+                <InputContainer>
+                  <input
+                    {...register('password')}
+                    type='password'
+                    value={passwordInput}
+                    name='password'
+                    onChange={(e) => setPasswordInput(e.target.value)}
+                  />
+                  <label htmlFor='password'> Your password </label>
+                  <section> {errors.password?.message} </section>
+                </InputContainer>
+                <InputContainer>
+                  <ModalButton type='submit'> Login </ModalButton>
+                </InputContainer>
+              </form>
+            </ModalForm>
           </ModalBox>
         </Modal>
       )}
@@ -94,7 +164,9 @@ const Landing = () => {
         </FirstSection>
         <SecondSection>
           <ButtonArea>
-            <Button>Get registering!</Button>
+            <Button onClick={() => history.push('/register')}>
+              Get registering!
+            </Button>
           </ButtonArea>
           <TextArea>
             <p>

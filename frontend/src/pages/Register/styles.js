@@ -20,7 +20,7 @@ export const FillerSection = styled.div`
   display: flex;
   flex-grow: 1;
   justify-content: left;
-  padding-left: 4%;
+  padding-left: 7%;
 
   width: 35%;
   height: 100vh;

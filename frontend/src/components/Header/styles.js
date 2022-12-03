@@ -16,14 +16,21 @@ export const LogoContainer = styled.div`
 `;
 
 export const MenuContainer = styled.div`
-  width: 20%;
+  width: 24%;
+
+  .logout {
+    &:hover {
+      color: #ff1a1a;
+      text-shadow: 0 0 3px #ff3333, 0 0 10px #fff;
+    }
+  }
 `;
 
 export const List = styled.ul`
   display: flex;
   flex-direction: row;
   list-style: none;
-  justify-content: space-between;
+  justify-content: space-evenly;
   font-size: 20px;
   font-weight: bold;
 `;

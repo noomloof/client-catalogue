@@ -78,14 +78,14 @@ export const Button = styled.button`
   position: relative;
   color: #9a9a9a;
   text-shadow: 0 0 1px #f3f3f3, 0 0 3px #fff;
-  background: rgba(99, 255, 186, 0.4);
+  /* background: rgba(99, 255, 186, 0.4);
   background: linear-gradient(
     90deg,
     rgba(99, 255, 186, 0.6) 0%,
     rgba(155, 255, 153, 0.6) 33%,
     rgba(198, 255, 127, 0.6) 66%,
     rgba(246, 255, 99, 0.6) 100%
-  );
+  ); */
   transition: 500ms;
 
   &::after {
@@ -164,7 +164,7 @@ const modalFadeOutAnimation = keyframes`
 export const ModalBox = styled.div`
   z-index: 3;
   position: relative;
-  width: 25%;
+  width: 35%;
   text-align: center;
   margin: 0 auto;
   animation: ${(props) =>
@@ -173,19 +173,156 @@ export const ModalBox = styled.div`
           ${modalFadeInAnimation} 0.7s
         `
       : css`
-          ${modalFadeOutAnimation} 0.4s
+          ${modalFadeOutAnimation} 0.5s
         `};
+  border-width: 4px;
+  border-style: solid;
+  border-image: linear-gradient(135deg, #333eea, #531ba2) 2 2 2 2;
+  background: linear-gradient(
+    135deg,
+    rgba(103, 131, 227, 1) 0%,
+    rgba(171, 85, 190, 1) 100%
+  );
 
   header {
     display: flex;
-    padding: 1rem;
+    padding: 0.75rem;
     justify-content: space-between;
 
     .close {
       cursor: pointer;
     }
+
+    svg {
+      font-size: 15px;
+      transform: translateY(2px);
+    }
   }
-  button {
-    width: 100%;
+`;
+
+export const ModalForm = styled.div`
+  /* display: flex; */
+  /* justify-content: center; */
+`;
+
+export const InputContainer = styled.div`
+  position: relative;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  input {
+    outline: none;
+    text-align: left;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    width: 54%;
+
+    padding: 11px;
+
+    background: transparent;
+    transition: 0.3s;
+
+    color: black;
+
+    &:hover {
+    }
+
+    &:focus {
+      border: 1px solid black;
+      transition: 0.3s;
+      color: black;
+    }
+
+    :-webkit-autofill,
+    :-webkit-autofill:focus {
+      transition: background-color 600000s 0s, color 600000s 0s;
+    }
+  }
+
+  input[data-autocompleted] {
+    background-color: transparent !important;
+  }
+
+  label {
+    position: absolute;
+    top: 35px;
+    left: 8.125rem;
+    color: black;
+    transition: 0.3s;
+    font-size: 0.875rem;
+    pointer-events: none;
+    background: transparent;
+  }
+
+  input:focus ~ label,
+  input:not([value='']) ~ label {
+    top: 5px;
+    left: 7.625rem;
+    color: black;
+    font-size: 0.7rem;
+    padding-left: 3px;
+    padding-right: 3px;
+    transition: 0.4s;
+  }
+
+  input:not(:focus):valid ~ label {
+    color: black;
+  }
+
+  section {
+    text-align: left;
+    height: 16px;
+    font-size: 14px;
+    color: #ffa500;
+    text-shadow: 0 0 1px #ffa500, 0 0 3px #de0d0d;
+    letter-spacing: 0.64px;
+  }
+`;
+
+export const ModalButton = styled.button`
+  font-size: 16px;
+  padding: 14px 42px;
+  border-radius: 15px;
+  width: 36%;
+  color: #9a9a9a;
+  position: relative;
+
+  &::after {
+    content: 'Login';
+    text-shadow: 0 0 5px #f3f3f3, 0 0 8px #fff;
+    padding: 14px 42px;
+    color: black;
+    border-radius: 15px;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: rgb(99, 255, 186);
+    background: linear-gradient(
+      90deg,
+      rgba(99, 255, 186, 0.8) 0%,
+      rgba(155, 255, 153, 0.8) 33%,
+      rgba(198, 255, 127, 0.8) 66%,
+      rgba(246, 255, 99, 0.8) 100%
+    );
+    transition: 500ms;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+
+  &:active {
+    background: rgb(99, 255, 186);
+    background: linear-gradient(
+      90deg,
+      rgba(99, 255, 186, 1) 0%,
+      rgba(155, 255, 153, 1) 33%,
+      rgba(198, 255, 127, 1) 66%,
+      rgba(246, 255, 99, 1) 100%
+    );
   }
 `;

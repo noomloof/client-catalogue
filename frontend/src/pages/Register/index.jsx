@@ -24,9 +24,25 @@ const Register = () => {
 
   const schema = yup.object().shape({
     name: yup.string().required('Required field'),
-    email: yup.string().email().required('Required field'),
+    email: yup
+      .array()
+      .transform(function (value, originalValue) {
+        if (this.isType(value) && value !== null) {
+          return value;
+        }
+        return originalValue ? originalValue.split(/[\s,]+/) : [];
+      })
+      .of(yup.string().email().required('Required field')),
     password: yup.string().required('Required field'),
-    phone: yup.string().required('Required field'),
+    phone: yup
+      .array()
+      .transform(function (value, originalValue) {
+        if (this.isType(value) && value !== null) {
+          return value;
+        }
+        return originalValue ? originalValue.split(/[\s,]+/) : [];
+      })
+      .of(yup.string().required('Required field')),
   });
 
   const history = useHistory();
@@ -38,8 +54,8 @@ const Register = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmitHandler = ({ name, email, password, phone }) => {
-    const newUser = { name, emails: email, password, phones: phone };
-    const login = { email, password };
+    const newUser = { name, emails: email.join(','), password, phones: phone };
+    const login = { email: email[0], password };
 
     api
       .post('/users', newUser)
@@ -48,7 +64,7 @@ const Register = () => {
         api.post('/login', login).then((response) => {
           console.log(response);
           console.log(document.cookie);
-          history.push('/catalogue');
+          history.push('/catalog');
         });
       })
       .catch((error) => {
