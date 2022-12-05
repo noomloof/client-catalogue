@@ -27,7 +27,7 @@ export class User {
   @Column('text', { array: true })
   phones: string[];
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn()
   created_at: Date;
 
   @OneToMany(() => Client, (client) => client.user)

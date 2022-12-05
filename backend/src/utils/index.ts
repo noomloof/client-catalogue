@@ -1,4 +1,5 @@
 import { ArrayContains } from 'typeorm';
+import AppDataSource from '../data-source';
 import { Client } from '../entities/client.entity';
 import { User } from '../entities/user.entity';
 import AppError from '../errors/AppError';
@@ -88,4 +89,10 @@ export const updateEmailChecker = async (
       }
     }
   }
+};
+
+export const clearEverythingQueryBuilder = async () => {
+  await AppDataSource.createQueryBuilder().delete().from(Client).execute();
+
+  await AppDataSource.createQueryBuilder().delete().from(User).execute();
 };

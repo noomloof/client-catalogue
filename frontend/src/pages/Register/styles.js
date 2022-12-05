@@ -151,4 +151,40 @@ export const Button = styled.button`
   padding: 14px 42px;
   border-radius: 15px;
   width: 30%;
+  position: relative;
+
+  &::after {
+    content: 'Create account';
+    text-shadow: 0 0 5px #f3f3f3, 0 0 8px #fff;
+    padding: 14px 42px;
+    color: black;
+    border-radius: 15px;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: rgb(99, 255, 186);
+    background: linear-gradient(
+      90deg,
+      rgba(99, 255, 186, 0.8) 0%,
+      rgba(155, 255, 153, 0.8) 33%,
+      rgba(198, 255, 127, 0.8) 66%,
+      rgba(246, 255, 99, 0.8) 100%
+    );
+    transition: 500ms;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+
+  &:active {
+    background: rgb(99, 255, 186);
+    background: linear-gradient(
+      90deg,
+      rgba(99, 255, 186, 1) 0%,
+      rgba(155, 255, 153, 1) 33%,
+      rgba(198, 255, 127, 1) 66%,
+      rgba(246, 255, 99, 1) 100%
+    );
+  }
 `;

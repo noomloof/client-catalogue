@@ -49,13 +49,26 @@ export const ClientContainer = styled.div`
     rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
     rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
   width: 87%;
-  height: 72vh;
+  max-height: 70vh;
   padding: 4% 4%;
   display: flex;
   justify-content: center;
   border-radius: 10px;
   margin: 0 auto;
-  overflow-y: scroll;
+`;
+
+export const EmptyClientList = styled.div``;
+
+export const PopulatedClientList = styled.ul`
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto;
+  align-content: flex-start;
+  justify-content: left;
+  padding-left: 5%;
+  height: 50vh;
+  overflow-y: auto;
 
   ::-webkit-scrollbar {
     width: 2.5px;
@@ -72,18 +85,6 @@ export const ClientContainer = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-`;
-
-export const EmptyClientList = styled.div``;
-
-export const PopulatedClientList = styled.ul`
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  margin: 0 auto;
-  align-items: baseline;
-  justify-content: left;
-  padding-left: 5%;
 `;
 
 export const Modal = styled.div`

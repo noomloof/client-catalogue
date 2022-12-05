@@ -46,7 +46,6 @@ const Header = (props) => {
           </LogoContainer>
           <MenuContainer>
             <List>
-              <ListItem>About</ListItem>
               <ListItem
                 className='logout'
                 onClick={() => handleLogout()}
@@ -68,7 +67,6 @@ const Header = (props) => {
           </LogoContainer>
           <MenuContainer>
             <List>
-              <ListItem>About</ListItem>
               <ListItem onClick={() => pushRegister()}>Register</ListItem>
               <ListItem
                 onClick={() => {

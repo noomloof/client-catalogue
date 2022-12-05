@@ -1,28 +1,51 @@
 version: '3.9'
 
 services:
+  db:
+    container_name: db
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=42865271
+      - POSTGRES_DB=fullstack
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d fullstack']
+      interval: 7s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  migration:
+    build: ./backend
+    env_file: ./backend/.env
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; yarn migrate'
+    depends_on:
+      db:
+        condition: service_healthy
+
   api_express:
     container_name: api_express
-    image: node:17-alpine
-    build: ./backend/Dockerfile
+    env_file:
+      - ./backend/.env
+    build: ./backend
     ports:
       - 3000:3000
     depends_on:
       - db
-
-  db:
-    container_name: db
-    image: postgres:latest
-    env_file: ./backend/.env
-    ports:
-      - 5432:5432
+      - migration
+    links:
+      - db
 
   client:
     container_name: client
-    image: docker-react-i
-    build: ./frontend/Dockerfile
+    build: ./frontend
     ports:
-      - 3001:3001
+      - 3001:3000
     depends_on:
+      db:
+        condition: service_healthy
+    links:
       - db
       - api_express

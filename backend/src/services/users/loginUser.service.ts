@@ -6,6 +6,10 @@ import * as bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const loginUserService = async ({ email, password }: IUserLogin) => {
+  if (!email || !password) {
+    throw new AppError('Missing data', 422);
+  }
+
   const user = await userRepository.findBy({
     emails: ArrayContains([email]),
   });

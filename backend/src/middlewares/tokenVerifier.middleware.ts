@@ -8,7 +8,6 @@ const tokenVerifierMiddleware = async (
   next: NextFunction
 ) => {
   let token = req.headers.authorization;
-
   if (!token) {
     if (!req.cookies.token) {
       throw new AppError('Token is either expired or invalid', 401);
@@ -20,7 +19,7 @@ const tokenVerifierMiddleware = async (
   }
 
   jwt.verify(
-    req.cookies.token,
+    req.cookies.token || token,
     process.env.SECRET_KEY as string,
     (error: any, decoded: any) => {
       if (error) {

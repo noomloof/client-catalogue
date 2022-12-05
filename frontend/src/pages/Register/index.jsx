@@ -54,7 +54,12 @@ const Register = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmitHandler = ({ name, email, password, phone }) => {
-    const newUser = { name, emails: email.join(','), password, phones: phone };
+    const newUser = {
+      name,
+      emails: email.join(','),
+      password,
+      phones: phone.join(','),
+    };
     const login = { email: email[0], password };
 
     api

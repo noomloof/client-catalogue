@@ -5,6 +5,13 @@ export interface INewUser {
   phones: string[];
 }
 
+export interface INewUserRequest {
+  name: string;
+  emails: string;
+  password: string;
+  phones: string;
+}
+
 export interface IUserLogin {
   email: string;
   password: string;
