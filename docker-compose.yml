@@ -6,12 +6,9 @@ services:
     image: postgres:latest
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=42865271
-      - POSTGRES_DB=fullstack
+    env_file: ./backend/.env
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres -d fullstack']
+      test: ['CMD-SHELL', 'pg_isready -U $$DB_USER -d $$DB']
       interval: 7s
       timeout: 5s
       retries: 5

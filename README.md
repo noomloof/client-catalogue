@@ -21,6 +21,7 @@ Ensure there are no other processes running (close other localhost applications)
 
 ### <b> <i>2. Starting up frontend </i> </b>
 
+**2.0** Follow these steps with backend server running <br>
 **2.1** Enter the frontend folder <br>
 **2.2** Open bash or any other command language interpreter <br>
 **2.3** Run `yarn install` <br>
