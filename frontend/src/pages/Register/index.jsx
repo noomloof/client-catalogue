@@ -65,10 +65,7 @@ const Register = () => {
     api
       .post('/users', newUser)
       .then((response) => {
-        console.log(response);
         api.post('/login', login).then((response) => {
-          console.log(response);
-          console.log(document.cookie);
           history.push('/catalog');
         });
       })

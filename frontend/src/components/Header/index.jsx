@@ -26,10 +26,9 @@ const Header = (props) => {
     api
       .get('/login')
       .then((response) => {
-        console.log(response);
         history.push('/');
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };
 
   return (

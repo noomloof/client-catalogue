@@ -117,9 +117,6 @@ describe('/users', () => {
 
     userToken = response.body.token;
 
-    console.log(userToken.length);
-    console.log(userToken);
-
     expect(response.body).toHaveProperty('token');
     expect(response.status).toBe(200);
   });

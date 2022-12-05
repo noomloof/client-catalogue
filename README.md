@@ -53,14 +53,35 @@ SECRET_KEY=  # insert a secret key
 DB_TEST=  # insert a postgres database for testing
 ```
 
-### <b> <i> 2. Go to your root folder (where docker-compose.yml, backend and frontend are)
+### <b> <i> 2. Go to your root folder (where docker-compose.yml, backend and frontend are) </i> </b>
 
-### <b> <i> 3. Open base or any other command language interpreter
+### <b> <i> 3. Open base or any other command language interpreter </i> </b>
 
-### <b> <i> 4. Run `docker-compose up`
+### <b> <i> 4. Run `docker-compose up` </i> </b>
 
-### <b> <i> 5. After everything is done:
+### <b> <i> 5. After everything is done: </i> </b>
 
-> ### `localhost:3000` > Backend port; can be tested on insomnia
+> <b> <i> ### `localhost:3000` > Backend port; can be tested on insomnia </i> </b>
 >
-> ### `localhost:3001` > Frontend port; can be opened on your browser
+> <b> <i> ### `localhost:3001` > Frontend port; can be opened on your browser </i> </b>
+
+<br>
+
+> ## PSA
+
+There is also a .json to be imported into Insomnia for testing routes without much effort.
+
+<b> <i> NOTE: Emails and Phones must be separated by commas on both frontend inputs and Insomnia requests. </b> </i>
+
+Example:
+
+```
+http://localhost/users - POST
+
+{
+	"name": "Netuno da Silva",
+	"emails": "galaxia1@gmail.com, galaxia@gmail.com, galaxia29@gmail.com",
+	"password": "galaxys20",
+	"phones": "2139393939, 3199237281"
+}
+```

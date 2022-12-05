@@ -11,9 +11,7 @@ export const Container = styled.div`
   justify-content: space-between;
 `;
 
-export const LogoContainer = styled.div`
-  /* background-image: linear-gradient(135deg, #333eea 0%, #531ba2 100%); */
-`;
+export const LogoContainer = styled.div``;
 
 export const MenuContainer = styled.div`
   width: 24%;

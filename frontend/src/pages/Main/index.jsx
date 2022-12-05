@@ -71,7 +71,6 @@ const Main = () => {
     api
       .get('/clients/list')
       .then((response) => {
-        console.log(response);
         setClients(response.data);
         setIsLoading(true);
       })
@@ -134,7 +133,6 @@ const Main = () => {
     api
       .post('clients', newClient)
       .then((response) => {
-        console.log(response);
         toast.success('Client registered successfully', { autoClose: 1000 });
         loadClients();
         setTimeout(() => {

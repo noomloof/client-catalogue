@@ -57,7 +57,6 @@ const Landing = () => {
     api
       .post('/login', loginInfo)
       .then((response) => {
-        console.log(response);
         setShowLoginAnimation(false);
         setShowLogin(false);
         history.push('/catalog');

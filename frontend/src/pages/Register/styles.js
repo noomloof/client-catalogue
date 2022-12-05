@@ -15,7 +15,6 @@ export const Container = styled.div`
 `;
 
 export const FillerSection = styled.div`
-  /* display: flex; */
   flex-direction: column;
   display: flex;
   flex-grow: 1;
